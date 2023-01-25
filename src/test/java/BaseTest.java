@@ -38,18 +38,8 @@ public class BaseTest {
     protected final String URL = "https://stellarburgers.nomoreparties.site/";
 
     public WebDriver initDriver() {
-        if (properties.getProperties("browser").equals("yandex")) {
-            System.setProperty("webdriver.chrome.driver", "src/drv/chromedriver.exe");
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.setBinary("C:\\Users\\kazim\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
-            driver = new ChromeDriver(chromeOptions);
-        } else {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.setExperimentalOption("useAutomationExtension", false);
-            chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver(chromeOptions);
-        }
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
         objConstructorPage = new ConstructorPage(driver);
